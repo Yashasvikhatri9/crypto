@@ -11,15 +11,28 @@ DEFAULT_BASE_URL = "https://yashasvi-01-02-crypto-ai-api.hf.space"
 
 base_url = st.text_input("Hugging Face Base URL", value=DEFAULT_BASE_URL).strip().rstrip("/")
 
-coins = [
-    "bitcoin", "ethereum", "binancecoin", "solana", "cardano",
-    "ripple", "dogecoin", "polkadot", "avalanche-2", "chainlink",
-    "polygon", "litecoin", "tron", "shiba-inu", "uniswap",
-]
+COIN_MAPPING = {
+    "Bitcoin (BTC)": "bitcoin",
+    "Ethereum (ETH)": "ethereum",
+    "Binance Coin (BNB)": "binancecoin",
+    "Solana (SOL)": "solana",
+    "Cardano (ADA)": "cardano",
+    "Ripple (XRP)": "ripple",
+    "Dogecoin (DOGE)": "dogecoin",
+    "Polkadot (DOT)": "polkadot",
+    "Avalanche (AVAX)": "avalanche-2",
+    "Chainlink (LINK)": "chainlink",
+    "Polygon (MATIC)": "polygon",
+    "Litecoin (LTC)": "litecoin",
+    "Tron (TRX)": "tron",
+    "Shiba Inu (SHIB)": "shiba-inu",
+    "Uniswap (UNI)": "uniswap",
+}
 
 col1, col2 = st.columns(2)
 with col1:
-    coin_id = st.selectbox("Coin", coins, index=0)
+    selected_coin_name = st.selectbox("Coin", list(COIN_MAPPING.keys()), index=0)
+    coin_id = COIN_MAPPING[selected_coin_name]
 with col2:
     forecast_days = st.slider("Forecast Days", min_value=1, max_value=30, value=7)
 
