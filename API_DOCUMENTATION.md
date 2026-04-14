@@ -128,4 +128,16 @@ Fetch supplementary market data or enumerations.
   * **Input Parameters:** `coin_id`
   * **Output (JSON):** Basic coin info like `price_usd`, `market_cap_usd`, `volume_24h_usd`, `change_24h_pct`. 
 
+* **Endpoint:** `GET /graph/{coin_id}`
+  * **Input Parameters:**
+    * `coin_id` (Path, String): The ID of the coin.
+    * `days` (Query, Integer, Optional): Historical timeframe. Default 30.
+  * **Output (JSON):** Historical price data formatted for charting.
+    * `coin_id`: Coin identifier.
+    * `prices`: A nested array of `[timestamp_ms, close_price]` intended for charting plugins (e.g. Flutter apps).
+    * `action`: Trade recommendation indicator (`BUY`, `SELL`, or `HOLD`).
+    * `stop_loss`: A dynamic suggestion based on 2x Average True Range (ATR).
+      * `up`: Suggested take-profit or short stop loss.
+      * `down`: Suggested support or long stop loss.
+
 ---
